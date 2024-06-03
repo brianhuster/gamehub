@@ -1,3 +1,8 @@
-<% layout('layout') %>
-<h1>Welcome to Game Hub</h1>
-<p>Your one-stop hub for all things gaming!</p>
+<% var title = 'Home'; %>
+<% var content = `
+<div id="content">
+    <h1>Welcome to GameHub</h1>
+    <p>Enjoy a variety of web games here!</p>
+</div>
+` %>
+<%- include('../layout', {body: content}) %>
