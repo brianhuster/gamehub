@@ -8,10 +8,10 @@ const mysql = require('mysql2/promise');
 
 // Database configuration
 const dbConfig = {
-    host: 'localhost:3306',
+    host: 'localhost',
     user: 'brianhuster',
-    password: '123456',
-    database: 'gamehub'
+    password: 'password',
+    database: 'gamehub',
 };
 
 // Connect to the database

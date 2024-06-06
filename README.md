@@ -11,10 +11,17 @@ npm install
 
 Install MySQL
 ` sudo apt install mysql-server `
-` sudo service mysql stop `
-` echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '123456';"` >> "/home/[username]/mysql-init" `
-` sudo mysqld --init-file=/home/[username]/mysql-init & `
 ` sudo service mysql start `
+
+Execute these queries in MySQL
+```
+CREATE USER 'brianhuster'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'brianhuster'@'localhost';
+CREATE DATABASE gamehub;
+USE gamehub;
+```
+
+Now run the file `database.sql` in MySQL
 
 ### Compiles and hot-reloads for development
 ```
