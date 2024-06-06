@@ -9,6 +9,13 @@ cd gamehub
 npm install
 ```
 
+Install MySQL
+` sudo apt install mysql-server `
+` sudo service mysql stop `
+` echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'NewPassword';"` >> "/home/[username]/mysql-init" `
+` sudo mysqld --init-file=/home/[username]/mysql-init & `
+` sudo service mysql start `
+
 ### Compiles and hot-reloads for development
 ```
 npm run dev
