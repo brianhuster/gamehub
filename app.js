@@ -4,6 +4,29 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const mysql = require('mysql2/promise');
+
+// Database configuration
+const dbConfig = {
+  host: 'localhost',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'your_database_name'
+};
+
+// Connect to the database
+let db;
+async function connectToDatabase() {
+  try {
+    db = await mysql.createConnection(dbConfig);
+    console.log('Connected to MySQL database!');
+  } catch (err) {
+    console.error('Error connecting to database:', err);
+  }
+}
+
+connectToDatabase();
+
 // Use ejs as view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

@@ -1,21 +1,68 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
 }
+
 header {
     background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-header nav ul {
+
+nav ul {
     list-style-type: none;
+    margin: 0;
     padding: 0;
+    display: flex;
 }
-header nav ul li {
-    display: inline;
-    margin-right: 10px;
+
+nav ul li {
+    margin-right: 20px;
 }
-header nav ul li a {
-    color: white;
+
+nav ul li a {
+    color: #fff;
     text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* Dropdown Button */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #555;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
 }
