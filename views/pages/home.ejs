@@ -1,8 +1,17 @@
 <% var title = 'Home'; %>
 <% var content = `
 <div id="content">
-    <h1>Welcome to GameHub</h1>
     <p>Enjoy a variety of web games here!</p>
+    <div class="game-list">
+    <% games.forEach(game => { %>
+      <div class="game-card">
+        <h2><%= game.name %></h2>
+        <p><%= game.description %></p>
+        <p>Genre: <%= game.genre %></p>
+        <iframe src="<%= game.link %>" frameborder="0" allowfullscreen></iframe>
+      </div>
+    <% }) %>
+  </div>
 </div>
 ` %>
 <%- include('../layout', {body: content}) %>

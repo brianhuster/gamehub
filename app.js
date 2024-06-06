@@ -8,10 +8,10 @@ const mysql = require('mysql2/promise');
 
 // Database configuration
 const dbConfig = {
-  host: 'localhost',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'your_database_name'
+    host: 'localhost:3306',
+    user: 'brianhuster',
+    password: '123456',
+    database: 'gamehub'
 };
 
 // Connect to the database
@@ -24,18 +24,21 @@ async function connectToDatabase() {
     console.error('Error connecting to database:', err);
   }
 }
-
 connectToDatabase();
 
-// Use ejs as view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Use static files from 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.render('pages/home', { title: 'Home' });
+    try {
+        const [rows] = db.execute('SELECT * FROM games');
+        res.render('pages/home', { games: rows });
+    } catch (err) {
+        console.error('Error fetching games:', err);
+        res.status(500).send('Error fetching games');
+  }
 });
 
 app.get('/about', (req, res) => {
