@@ -2,23 +2,22 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 // Database configuration
 const dbConfig = {
     host: 'localhost',
+    port: 3306,
     user: 'brianhuster',
     password: 'password',
     database: 'gamehub',
 };
-
-// Connect to the database
 let db;
-async function connectToDatabase() {
+function connectToDatabase() {
   try {
-    db = await mysql.createConnection(dbConfig);
+    db = mysql.createConnection(dbConfig);
     console.log('Connected to MySQL database!');
   } catch (err) {
     console.error('Error connecting to database:', err);
@@ -32,21 +31,23 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    try {
-        const [rows] = db.execute('SELECT * FROM games');
-        res.render('pages/home', { games: rows });
-    } catch (err) {
-        console.error('Error fetching games:', err);
-        res.status(500).send('Error fetching games');
-  }
+    db.query('SELECT * FROM games', (err, results) => {
+        if (err) {
+            console.error('Error querying database:', err);
+            res.sendStatus(500);
+        }
+        else {
+            res.render('home', { title: 'Home', games: results });
+        }
+    });
 });
 
 app.get('/about', (req, res) => {
-    res.render('pages/about', { title: 'About' });
+    res.render('about', { title: 'About' });
 });
 
 app.get('/contact', (req, res) => {
-    res.render('pages/contact', { title: 'Contact' });
+    res.render('contact', { title: 'Contact' });
 });
 
 // Start server
