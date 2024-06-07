@@ -4,10 +4,10 @@
     <div class="game-list">
 <% games.forEach(game => { %>
         <div class="game-card">
-            <h2><%= game.name %></h2>
-            <p><%= game.description %></p>
-            <p>Genre: <%= game.genre %></p>
-            <iframe src="<%= game.link %>" frameborder="0" allowfullscreen></iframe>
+            <a href="<%= game.link %>">
+                <img src="images/<%= game.thumbnail %>" alt="<%= game.name %>">
+                <h3><%= game.name %></h3>
+            </a>            
         </div>
 <% }) %>
     </div>
