@@ -61,6 +61,12 @@ app.get('/contact', async (req, res) => {
     res.render('contact', { title: 'Contact' , genres: genres});
 });
 
+app.use( async (req, res, next) => {
+    const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+    res.status(404).render('404', { title: '404: Page Not Found', genres: genres });
+});
+
+
 // Start server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
