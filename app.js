@@ -1,10 +1,9 @@
 const express = require('express');
 const path = require('path');
+const mysql = require('mysql2/promise'); // Use mysql2/promise for async/await
 
 const app = express();
 const PORT = 3000;
-
-const mysql = require('mysql2');
 
 // Database configuration
 const dbConfig = {
@@ -14,32 +13,41 @@ const dbConfig = {
     password: 'password',
     database: 'gamehub',
 };
+
 let db;
-function connectToDatabase() {
-  try {
-    db = mysql.createConnection(dbConfig);
-    console.log('Connected to MySQL database!');
-  } catch (err) {
-    console.error('Error connecting to database:', err);
-  }
+async function connectToDatabase() {
+    try {
+        db = await mysql.createConnection(dbConfig);
+        console.log('Connected to MySQL database!');
+    } catch (err) {
+        console.error('Error connecting to database:', err);
+    }
 }
 connectToDatabase();
+
+async function sqlQuery(query) {
+    try {
+        const [results] = await db.execute(query); // Use execute instead of query
+        return results;
+    } catch (err) {
+        console.error('Error querying', query, 'from MySQL database:', err);
+        throw err;
+    }
+}
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-    db.query('SELECT * FROM games', (err, results) => {
-        if (err) {
-            console.error('Error querying database:', err);
-            res.sendStatus(500);
-        }
-        else {
-            res.render('home', { title: 'Home', games: results });
-        }
-    });
+app.get('/', async (req, res) => {
+    try {
+        const games = await sqlQuery('SELECT * FROM games');
+        const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+        res.render('home', { title: 'Home', games: games, genres: genres });
+    } catch (err) {
+        res.sendStatus(500);
+    }
 });
 
 app.get('/about', (req, res) => {
@@ -54,3 +62,4 @@ app.get('/contact', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+

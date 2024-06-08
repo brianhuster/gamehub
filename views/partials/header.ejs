@@ -13,12 +13,12 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li class="dropdown">
-                    <a href="/games">Games</a>
+                    <a href="#">Games</a>
                     <div class="dropdown-content">
-                        <a href="/games/action">Action</a>
-                        <a href="/games/adventure">Adventure</a>
-                        <a href="/games/strategy">Strategy</a>
-                        <a href="/games/sports">Sports</a>
+                        <% genres.forEach(genre => { %>
+                            <a href="/<%= genre.genre.toLowerCase(); %>"><%= genre.genre %></a> 
+                            Debugging result show that `genre` is an object with `genre` property, I don't know why, but that's it
+                        <% }) %>
                     </div>
                 </li>
                 <li><a href="/about">About</a></li>

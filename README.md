@@ -7,7 +7,7 @@ Make sure NodeJS is installed in your system.
 npm install
 ```
 
-Install MySQL
+Install mysql server
 ` sudo apt install mysql-server `
 ` sudo service mysql start `
 
