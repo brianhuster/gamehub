@@ -32,6 +32,7 @@ async function sqlQuery(query) {
     } catch (err) {
         console.error('Error querying', query, 'from MySQL database:', err);
         throw err;
+        return [];
     }
 }
 
@@ -50,12 +51,14 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/about', (req, res) => {
-    res.render('about', { title: 'About' });
+app.get('/about', async (req, res) => {
+    const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+    res.render('about', { title: 'About' , genres: genres});
 });
 
-app.get('/contact', (req, res) => {
-    res.render('contact', { title: 'Contact' });
+app.get('/contact', async (req, res) => {
+    const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+    res.render('contact', { title: 'Contact' , genres: genres});
 });
 
 // Start server
