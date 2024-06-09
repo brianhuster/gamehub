@@ -19,7 +19,7 @@ CREATE DATABASE gamehub;
 USE gamehub;
 ```
 
-Now run the file `database.sql` in MySQL
+Now run the file `db/db.sql` in MySQL
 
 ### Compiles and hot-reloads for development
 ```
