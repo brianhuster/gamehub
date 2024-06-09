@@ -1,6 +1,7 @@
 <%- include('partials/header') %>
+<h1><%= game.name %></h1>
 <div class="game-container">
-    <iframe src="https://example.com/game" width="800" height="600" frameborder="0"></iframe>
+    <iframe src="<%= game.link %>" width="800" height="600" frameborder="0"></iframe>
 </div>
 
 <div class="comment-section">
@@ -10,7 +11,7 @@
         <button type="button">Submit</button>
     </div>
     <div id="comments">
-        <!-- Comments will be dynamically added here -->
+         
     </div>
 </div>
 <%- include('partials/footer') %>  

@@ -68,6 +68,14 @@ app.get('/games/:genre', async (req, res) => {
     res.render('games', { title: genre, genres: genres, genre: genre, games: games});
 });
 
+app.get('/play/:id', async (req, res) => {
+    const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+    const id = req.params.id;
+    game_list= await sqlQuery('SELECT * FROM games WHERE id = ' + id);
+    game = game_list[0];
+    res.render('play', { title: game.title, genres: genres, game: game});
+});
+
 app.use( async (req, res, next) => {
     const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
     res.status(404).render('404', { title: '404: Page Not Found', genres: genres });
