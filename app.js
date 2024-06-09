@@ -71,7 +71,7 @@ app.get('/games/:genre', async (req, res) => {
 app.get('/play/:id', async (req, res) => {
     const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
     const id = req.params.id;
-    game_list= await sqlQuery('SELECT * FROM games WHERE id = ' + id);
+    game_list= await sqlQuery('SELECT * FROM games WHERE id = ' + '"' + id + '"');
     game = game_list[0];
     res.render('play', { title: game.title, genres: genres, game: game});
 });
