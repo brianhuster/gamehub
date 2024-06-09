@@ -4,6 +4,7 @@ body {
     margin: 0;
 }
 
+/* style for common partials */
 header {
     background-color: #333;
     color: #fff;
@@ -11,6 +12,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 nav ul {
@@ -65,23 +74,23 @@ nav ul li a:hover {
 }
 
 #content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .game-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
 }
 
 .game-card {
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  text-align: center;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .game-card a {
@@ -106,13 +115,6 @@ nav ul li a:hover {
   }
 }
 
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    flex-shrink: 0;
-}
 
 .contact-info {
     margin-bottom: 20px;
@@ -140,5 +142,97 @@ footer {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+
+.game-container {
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+}
+.comment-section {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-section h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.rating-group {
+    display: flex;
+    align-items: center;
+}
+
+.rating-group label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.rating-input {
+    width: 80px;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3e8e41;
+}
+.comment {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.comment .author {
+    font-weight: bold;
 }
 

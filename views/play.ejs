@@ -7,11 +7,28 @@
 <div class="comment-section">
     <h2>Comments</h2>
     <div class="comment-form">
-        <textarea placeholder="Leave a comment..."></textarea>
-        <button type="button">Submit</button>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Your email" required>
+        </div>
+        <div class="form-group">
+            <label for="cmt_input">Comment:</label>
+            <textarea id="cmt_input" placeholder="Leave a comment..." rows="4"></textarea>
+        </div>
+        <div class="form-group rating-group">
+            <label for="rating">Score (1-5):</label>
+            <div class="rating-input">
+                <input type="number" id="rating" name="rating" min="1" max="5" placeholder="Rate 1-5" required>
+            </div>
+        </div>
+        <button type="button" class="submit-btn">Submit</button>
     </div>
     <div id="comments">
-         
+        
     </div>
 </div>
 <%- include('partials/footer') %>  
