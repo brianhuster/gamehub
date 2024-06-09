@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<div id="content">
+    <h1><%= genre %></h1>
+    <div class="game-list">
+<% games.forEach(game => { %>
+        <div class="game-card">
+            <a href="<%= game.link %>">
+                <img src="images/<%= game.thumbnail %>" alt="<%= game.name %>">
+                <h3><%= game.name %></h3>
+            </a>            
+        </div>
+<% }) %>
+    </div>
+</div>
+<%- include('partials/footer') %>  

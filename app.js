@@ -5,7 +5,7 @@ const mysql = require('mysql2/promise'); // Use mysql2/promise for async/await
 const app = express();
 const PORT = 3000;
 
-// Database configuration
+// Database connection
 const dbConfig = {
     host: 'localhost',
     port: 3306,
@@ -13,7 +13,6 @@ const dbConfig = {
     password: 'password',
     database: 'gamehub',
 };
-
 let db;
 async function connectToDatabase() {
     try {
@@ -61,13 +60,19 @@ app.get('/contact', async (req, res) => {
     res.render('contact', { title: 'Contact' , genres: genres});
 });
 
+app.get('/games/:genre', async (req, res) => {
+    const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
+    const genre = req.params.genre;  // genre is a parameter in the URL, that's why it is lowercased
+    const query = 'SELECT * FROM games WHERE LOWER(genre) = ' + '"' + genre + '"';
+    const games = await sqlQuery(query);
+    res.render('games', { title: genre, genres: genres, genre: genre, games: games});
+});
+
 app.use( async (req, res, next) => {
     const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
     res.status(404).render('404', { title: '404: Page Not Found', genres: genres });
 });
 
-
-// Start server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
