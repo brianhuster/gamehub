@@ -10,7 +10,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('shared', express.static(path.join(__dirname, 'shared')));
 
-app.use(express.json());
+app.use(express.json())
 
 const routes = require('./routes');
 app.use('/', routes);
@@ -63,7 +63,7 @@ app.get('/play/:id', async (req, res) => {
         const id = req.params.id;
         const genres = await sqlQuery('SELECT DISTINCT genre FROM games'); 
         const gamelist = await sqlQuery(`SELECT * FROM games WHERE id = '${id}'`);
-        const game= gamelist[0];
+        const game = gamelist[0];
         const comments = await sqlQuery(`SELECT * FROM comments WHERE gameid = '${id}' ORDER BY time DESC`);
         res.render('play', { title: game.title, genres, game, comments });
     } catch (err) {

@@ -1,0 +1,43 @@
+#content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.game-card {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.game-card a {
+    text-decoration: none;
+    color: #333;
+}
+
+.game-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.game-card h3 {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+
+@media screen and (max-width: 800px) {
+    .game-list {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+

@@ -21,6 +21,7 @@ function handleSubmit() {
     const commentInput = document.getElementById("cmt_input");
     const ratingInput = document.getElementById("rating");
 
+    // The trim() method removes whitespaces in the beginning and ending of a string.
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const comment = commentInput.value.trim();
