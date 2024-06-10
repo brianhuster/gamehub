@@ -289,6 +289,6 @@ footer {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.comment #name {
+.comment .name {
     font-weight: bold;
 }
