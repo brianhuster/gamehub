@@ -17,7 +17,7 @@
                     <div class="dropdown-content">
                         <% genres.forEach(genre => { %>
                             <a href="/games/<%= genre.genre.toLowerCase(); %>"><%= genre.genre %></a> 
-        <!--Debugging result show that `genre` is an object with `genre` property, I don't know why, but that's it-->
+                            <!-- The server returned an object -->
                         <% }) %>
                     </div>
                 </li>
