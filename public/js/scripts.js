@@ -13,7 +13,6 @@ function topFunction() {
 }
 
 // Submitting comments
-const badWords = ["fuck", "fvck", "viet cong", "nigger", "ching chong", "son of a bitch"];
 submitBtn.addEventListener("click", handleSubmit);
 
 function handleSubmit() {
@@ -40,16 +39,10 @@ function handleSubmit() {
         email,
         comment,
         rating,
-        time: new Date().toISOString(),  // Add the current time
         gameid: getGameIdFromUrl()
     };
 
     sendData(formData);
-}
-
-function checkForBadWords(comment) {
-    const lowercaseComment = comment.toLowerCase();
-    return badWords.some((word) => lowercaseComment.includes(word));
 }
 
 function getGameIdFromUrl() {

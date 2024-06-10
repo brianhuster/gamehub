@@ -4,6 +4,6 @@ const router = express.Router();
 const commentsRoutes = require('./comments');
 
 // Mount routes
-router.use('/comments', commentsRoutes);
+router.use('/', commentsRoutes);
 
 module.exports = router;
