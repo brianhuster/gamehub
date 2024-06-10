@@ -1,3 +1,5 @@
+const {containsBadWords} = require("../../shared/common");
+
 const topbutton = document.getElementById("topBtn");
 const submitBtn = document.getElementById("submit-btn");
 
@@ -27,7 +29,7 @@ function handleSubmit() {
     const comment = commentInput.value.trim();
     const rating = ratingInput.value.trim();
 
-    const hasBadWords = checkForBadWords(comment);
+    const hasBadWords = containsBadWords(comment);
     if (hasBadWords) {
         alert(
             "Your comment contains inappropriate words and cannot be submitted."
