@@ -28,7 +28,17 @@
         <button type="button" class="submit-btn" id="submit-btn">Submit</button>
     </div>
     <div id="comments">
-        
+        <% if (comments.length > 0) { %>
+            <ul>
+                <% comments.forEach(function(comment) { %>
+                    <li>
+                        <h4 class=""><%= comment.name %> (<%= comment.rating %>/5)</h4>
+                        <p><%= comment.comment %></p>
+                        <small>Posted on <%= comment.time %></small>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %> 
     </div>
 </div>
 <%- include('partials/footer') %>  

@@ -115,7 +115,7 @@ nav ul li a:hover {
     }
 }
 
-@media (max-width: 800px) { 
+@media (max-width: 1200px) { 
     #topBtn img {
         width: 40px;
         height: auto;
@@ -128,8 +128,8 @@ footer {
     padding: 20px;
     text-align: center;
     flex-shrink: 0;
+    margin-top: 1000px;
 }
-
 
 /* style for other parts */
 #content {
@@ -289,6 +289,6 @@ footer {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.comment .author {
+.comment #name {
     font-weight: bold;
 }
