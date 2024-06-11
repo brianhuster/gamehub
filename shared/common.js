@@ -22,8 +22,4 @@ if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
         currentTime
     };  
 }
-else {
-    window.containsBadWords = containsBadWords;
-    window.currentTime = currentTime;
-}
 

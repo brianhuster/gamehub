@@ -25,5 +25,14 @@
                 <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
+        <div id="auth">
+            <% if (user) { %>
+                <span>Welcome, <%= user.username %></span>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            <% } %>
+        </div>
     </header>
 
