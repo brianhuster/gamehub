@@ -5,25 +5,22 @@
     background-color: white;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form {
     display: flex;
     flex-direction: column;
 }
 
-label {
+.login h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-input,
-textarea {
+.login input,
+.login textarea {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -31,7 +28,7 @@ textarea {
     font-size: 16px;
 }
 
-button {
+.login button {
     background-color: #4caf50;
     color: white;
     padding: 10px 20px;
@@ -42,6 +39,6 @@ button {
     width: 100%;
 }
 
-button:hover {
+.login button:hover {
     background-color: #45a049;
 }

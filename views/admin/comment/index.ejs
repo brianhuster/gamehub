@@ -1,0 +1,36 @@
+<%- include('../../partials/header') %>
+<link rel="stylesheet" href="/css/home-games.css">
+<div id="content">
+    <div style="display: flex;justify-content: space-between;align-content: center;align-items: center">
+        <h1>QL Comments</h1>
+    </div>
+    <div class="game-list">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% comments.forEach(item => { %>
+                    <tr>
+                        <th scope="row">
+                            <a><%= item.id %></a>
+                        </th>
+                        <td><%= item.name %></td>
+                        <td><%= item.email %></td>
+                        <td><%= item.rating %></td>
+                        <td>
+                            <a href="/admin/comment/delete/<%= item.id %>">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include('../../partials/footer') %>

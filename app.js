@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const { sqlQuery } = require('./db/mysqlUtils'); 
+const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
@@ -11,12 +12,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/shared', express.static(path.join(__dirname, 'shared')));
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 const routes = require('./routes');
 app.use('/', routes);
 
 async function handleHeader(req, res) {
-    form = {genres: null, user: null};
+    let form = {genres: null, user: null, views: 0};
+    let row = await sqlQuery('SELECT * FROM visits');
+    form.views = row[0].views;
     if (req.session.user) {
         form.user = req.session.user;
     }
@@ -30,9 +34,10 @@ async function handleHeader(req, res) {
 
 app.get('/', async (req, res) => {
     try {
+        let row = sqlQuery('UPDATE visits SET views = views + 1');
         const games = await sqlQuery('SELECT * FROM games');
-        const headerData = await handleHeader(); 
-        res.render('home', { title: 'Home GameHub', games, genres: headerData.genres, user: headerData.user});  
+        const headerData = await handleHeader(req, res); 
+        res.render('home', { title: 'Home GameHub', games, headerData});  
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
@@ -41,8 +46,8 @@ app.get('/', async (req, res) => {
 
 app.get('/about', async (req, res) => {
     try {
-        const headerData = await handleHeader();
-        res.render('about', { title: 'About GameHub', genres: headerData.genres, user: headerData.user});
+        const headerData = await handleHeader(req, res);
+        res.render('about', { title: 'About GameHub', headerData});
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
@@ -51,8 +56,8 @@ app.get('/about', async (req, res) => {
 
 app.get('/contact', async (req, res) => {
     try {
-        const headerData = await handleHeader();
-        res.render('contact', { title: 'Contact GameHub', genres: headerData.genres, user: headerData.user});
+        const headerData = await handleHeader(req, res);
+        res.render('contact', { title: 'Contact GameHub', headerData});
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
@@ -62,9 +67,9 @@ app.get('/contact', async (req, res) => {
 app.get('/games/:genre', async (req, res) => {
     try {
         const { genre } = req.params;
-        const headerData = await handleHeader();
+        const headerData = await handleHeader(req, res);
         const games = await sqlQuery(`SELECT * FROM games WHERE LOWER(genre) = '${genre}'`);
-        res.render('games', { title: genre, genres: headerData.genres, user: headerData.user, genre, games });  
+        res.render('games', { title: genre, headerData, genre, games});  
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
@@ -73,20 +78,78 @@ app.get('/games/:genre', async (req, res) => {
 
 app.get('/play/:id', async (req, res) => {
     try {
+        const headerData = await handleHeader(req, res);
         const id = req.params.id;
-        const genres = await handleHeader(); 
+        const genres = await handleHeader(req, res); 
         const gamelist = await sqlQuery(`SELECT * FROM games WHERE id = '${id}'`);
         const game = gamelist[0];
         const comments = await sqlQuery(`SELECT * FROM comments WHERE gameid = '${id}' ORDER BY time DESC`);
-        res.render('play', { title: game.title, genres: headerData.genres, user: headerData.user, game, comments });
+        res.render('play', { title: game.title, headerData, game, comments});
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
     }
 });
 
-app.use((req, res, next) => {
-    res.status(404).render('404', { title: '404: Page Not Found' });
+app.get("/login", async (req, res) => {
+    const headerData = await handleHeader(req, res);
+    res.render("login", { title: "Login", headerData});
+});
+
+app.get("/signup", async (req, res) => {
+    const headerData = await handleHeader(req, res);
+    res.render("signup", { title: "Sign Up", headerData});
+});
+
+app.get('/admin/game', async (req, res) => {
+    try {
+        const headerData = await handleHeader(req, res);
+        const games = await sqlQuery(`SELECT * FROM games `);
+        res.render('admin/game/index', { title: 'List game', games: games, headerData});
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
+    }
+});
+
+app.get('/admin/game/add', async (req, res) => {
+    try {
+        const headerData = await handleHeader(req, res);
+        res.render('admin/game/add', { title: 'Add game', headerData});
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
+    }
+});
+
+app.get('/admin/game/edit/:id', async (req, res) => {
+    try {
+        const headerData = await handleHeader(req, res);
+        const id = req.params.id;
+        const games = await sqlQuery(`SELECT * FROM games where id = ${id}`);
+        const game = games[0];
+        res.render('admin/game/edit', { title: game.title, game: game, headerData});
+    } catch (err) {
+        console.error('Error:', err);
+        res.sendStatus(500);
+    }
+});
+
+app.get('/admin/game/delete/:id', async (req, res) => {
+    try {
+        const headerData = await handleHeader(req, res);
+        const id = req.params.id;
+        await sqlQuery(`DELETE  FROM games where id = ${id}`);
+        res.redirect(`/admin/game`);
+    } catch (err) {
+        console.error('Error:', err);
+        res.sendStatus(500);
+    }
+});
+
+app.use(async (req, res, next) => {
+    const headerData = await handleHeader(req, res);
+    res.status(404).render('404', { title: '404: Page Not Found', genres: headerData.genres, user: headerData.user, views: headerData.views});
 });
 
 app.listen(PORT, () => {

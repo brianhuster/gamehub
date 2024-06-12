@@ -1,5 +1,4 @@
 const topbutton = document.getElementById("topBtn");
-const submitBtn = document.getElementById("submit-btn");
 
 // Handle back-to-top button
 function topFunction() {
@@ -12,10 +11,7 @@ function topFunction() {
     }
 }
 
-// Submitting comments
-submitBtn.addEventListener("click", handleSubmit);
-
-function handleSubmit() {
+function submitCmt() {
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const commentInput = document.getElementById("cmt_input");
@@ -40,40 +36,55 @@ function handleSubmit() {
         email,
         comment,
         rating,
-        gameid: getGameIdFromUrl()
+        gameid: getGameIdFromUrl(),
     };
 
-    sendData(formData);
+    sendData(formData, "/submit-comment").then((status) => {
+        if (status === 200) {
+            alert("Comment submitted successfully!");
+            nameInput.value = "";
+            emailInput.value = "";
+            commentInput.value = "";
+            ratingInput.value = "";
+        } 
+        else {
+            alert("Failed to submit the comment. Please try again later.");
+        }
+    });
+}
+
+function login() {
+    const name = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    sendData({ name, password }, "/login");
 }
 
 function getGameIdFromUrl() {
     const url = window.location.href;
-    const parts = url.split('/');
-    return parts[parts.length - 1]; 
+    const parts = url.split("/");
+    return parts[parts.length - 1];
 }
 
-function sendData(formData) {
-    fetch("/submit-comment", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-    })
-        .then((response) => {
-            if (response.ok) {
-                alert("Comment submitted successfully!");
-                document.getElementById("cmt_input").value = "";
-            } else {
-                alert("Failed to submit the comment. Please try again later.");
-            }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert(
-                "An error occurred while submitting the comment. Please try again later."
-            );
+async function sendData(formData, url) {
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
         });
-}
 
+        const data = await response.json();
+        console.log(data);
+        if (data.redirect) {
+            window.location.href = data.redirect;
+        }
+        alert(data.message);
+        return response.status;
+    } catch (error) {
+        alert(error.message);
+        return error.status;
+    }
+}
 

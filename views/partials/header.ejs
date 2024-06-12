@@ -15,7 +15,7 @@
                 <li class="dropdown">
                     <a href="#">Games</a>
                     <div class="dropdown-content">
-                        <% genres.forEach(genre => { %>
+                        <% headerData.genres.forEach(genre => { %>
                             <a href="/games/<%= genre.genre.toLowerCase(); %>"><%= genre.genre %></a> 
                             <!-- The server returned an object -->
                         <% }) %>
@@ -26,12 +26,22 @@
             </ul>
         </nav>
         <div id="auth">
-            <% if (user) { %>
-                <span>Welcome, <%= user.username %></span>
+            <% if (headerData.user) { %>
+                <span>Welcome, <b><%= headerData.user.username %></b></span>
+                <% if (headerData.user.role === 'admin') { %>
+                    <li class="dropdown">
+                        <a href="#">Admin</a>
+                        <div class="dropdown-content">
+                            <a href="#">Views : <%= headerData.views %></a>
+                            <a href="/admin/game">Game</a>
+                            <a href="/admin/comment">Comment</a>
+                        </div>
+                    </li>
+                <% } %>
                 <a href="/logout">Logout</a>
             <% } else { %>
                 <a href="/login">Login</a>
-                <a href="/register">Register</a>
+                <a href="/signup">Register</a>
             <% } %>
         </div>
     </header>

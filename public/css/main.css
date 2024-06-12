@@ -4,7 +4,6 @@ body {
     margin: 0;
 }
 
-/* style for common partials */
 header {
     background-color: #333;
     color: #fff;
@@ -25,14 +24,16 @@ nav ul li {
     margin-right: 20px;
 }
 
-nav ul li a {
+nav ul li a,
+#auth a {
     color: #fff;
     text-decoration: none;
     padding: 10px;
     transition: background-color 0.3s ease;
 }
 
-nav ul li a:hover {
+nav ul li a:hover,
+#auth a:hover {
     background-color: #555;
 }
 
