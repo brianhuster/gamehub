@@ -3,6 +3,7 @@ const session = require('express-session');
 const router = express.Router();
 const authRoutes = require('./auth');
 const commentsRoutes = require('./comments');
+const adminRoutes = require('./admin');
 
 router.use(
     session({
@@ -14,5 +15,6 @@ router.use(
 
 router.use('/', authRoutes);
 router.use('/', commentsRoutes);
+router.use('/', adminRoutes);
 
 module.exports = router;

@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const { sqlQuery } = require('./db/mysqlUtils'); 
-const session = require('express-session');
 const app = express();
 const PORT = 3000;
 
@@ -108,7 +107,7 @@ app.get('/admin/game', async (req, res) => {
         res.render('admin/game/index', { title: 'List game', games: games, headerData});
     } catch (err) {
         console.error(err);
-        res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
+        res.status(500).send({ message: 'Failed to fetch games' });
     }
 });
 
@@ -118,7 +117,7 @@ app.get('/admin/game/add', async (req, res) => {
         res.render('admin/game/add', { title: 'Add game', headerData});
     } catch (err) {
         console.error(err);
-        res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
+        res.status(500).send({ message: 'Failed to add game. Please try again' });
     }
 });
 
@@ -126,7 +125,7 @@ app.get('/admin/game/edit/:id', async (req, res) => {
     try {
         const headerData = await handleHeader(req, res);
         const id = req.params.id;
-        const games = await sqlQuery(`SELECT * FROM games where id = ${id}`);
+        const games = await sqlQuery(`SELECT * FROM games where id = '${id}'`);
         const game = games[0];
         res.render('admin/game/edit', { title: game.title, game: game, headerData});
     } catch (err) {
@@ -135,21 +134,19 @@ app.get('/admin/game/edit/:id', async (req, res) => {
     }
 });
 
-app.get('/admin/game/delete/:id', async (req, res) => {
+app.get('/admin/comment', async (req, res) => {
     try {
-        const headerData = await handleHeader(req, res);
-        const id = req.params.id;
-        await sqlQuery(`DELETE  FROM games where id = ${id}`);
-        res.redirect(`/admin/game`);
+        const comments = await sqlQuery(`SELECT * FROM comments `);
+        res.render('admin/comment/index', { title: 'List comments', comments: comments});
     } catch (err) {
-        console.error('Error:', err);
-        res.sendStatus(500);
+        console.error(err);
+        res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
     }
 });
 
 app.use(async (req, res, next) => {
     const headerData = await handleHeader(req, res);
-    res.status(404).render('404', { title: '404: Page Not Found', genres: headerData.genres, user: headerData.user, views: headerData.views});
+    res.status(404).render('404', { title: '404: Page Not Found', headerData});
 });
 
 app.listen(PORT, () => {
