@@ -17,7 +17,6 @@
                     <div class="dropdown-content">
                         <% headerData.genres.forEach(genre => { %>
                             <a href="/games/<%= genre.genre.toLowerCase(); %>"><%= genre.genre %></a> 
-                            <!-- The server returned an object -->
                         <% }) %>
                     </div>
                 </li>

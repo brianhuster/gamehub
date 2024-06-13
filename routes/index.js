@@ -4,6 +4,7 @@ const router = express.Router();
 const authRoutes = require('./auth');
 const commentsRoutes = require('./comments');
 const adminRoutes = require('./admin');
+const contactRoutes = require('./contact');
 
 router.use(
     session({
@@ -16,5 +17,6 @@ router.use(
 router.use('/', authRoutes);
 router.use('/', commentsRoutes);
 router.use('/', adminRoutes);
+router.use('/', contactRoutes);
 
 module.exports = router;

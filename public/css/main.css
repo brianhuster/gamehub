@@ -78,7 +78,7 @@ nav ul li a:hover,
     border-radius: 50%;
     opacity: 0.5;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to right, #ff9966, #ff5e62);
+    background: linear-gradient(to right, #a31880, #ff5e62);
     transition: opacity 0.3s ease;
     animation: bounce 2s infinite;
 }
@@ -109,17 +109,40 @@ nav ul li a:hover,
     }
 }
 
+@media (max-width: 1200px) { 
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #auth {
+        display: flex;
+        align-items: center;
+    }
+
+    #topBtn img {
+        width: 40px;
+        height: auto;
+    }
+}
+
 @media (max-width: 800px) { 
     #topBtn img {
         width: 30px;
         height: auto;
     }
-}
 
-@media (max-width: 1200px) { 
-    #topBtn img {
-        width: 40px;
-        height: auto;
+    header {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px;
     }
 }
 
@@ -128,8 +151,7 @@ footer {
     color: #fff;
     padding: 20px;
     text-align: center;
-    flex-shrink: 0;
-    position: static;
+    position: fixed;
     bottom: 0;
     width: 100%;
 }

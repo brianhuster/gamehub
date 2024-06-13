@@ -127,18 +127,18 @@ app.get('/admin/game/edit/:id', async (req, res) => {
         const id = req.params.id;
         const games = await sqlQuery(`SELECT * FROM games where id = '${id}'`);
         const game = games[0];
-        res.render('admin/game/edit', { title: game.title, game: game, headerData});
+        res.render('admin/game/edit', { title: game.title, game, headerData});
     } catch (err) {
         console.error('Error:', err);
         res.sendStatus(500);
     }
 });
 
-app.get('/admin/comment', async (req, res) => {
+app.get('/admin/comments', async (req, res) => {
     try {
         const headerData = await handleHeader(req, res);
         const comments = await sqlQuery(`SELECT * FROM comments `);
-        res.render('admin/comment/index', { title: 'List comments', comments: comments, headerData});
+        res.render('admin/comments/index', { title: 'List comments', comments: comments, headerData});
     } catch (err) {
         console.error(err);
         res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
