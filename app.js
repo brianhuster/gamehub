@@ -136,8 +136,9 @@ app.get('/admin/game/edit/:id', async (req, res) => {
 
 app.get('/admin/comment', async (req, res) => {
     try {
+        const headerData = await handleHeader(req, res);
         const comments = await sqlQuery(`SELECT * FROM comments `);
-        res.render('admin/comment/index', { title: 'List comments', comments: comments});
+        res.render('admin/comment/index', { title: 'List comments', comments: comments, headerData});
     } catch (err) {
         console.error(err);
         res.status(500).send({ message: 'Failed to submit the comment. Please try again later.\n' });
