@@ -119,19 +119,9 @@ nav ul li a:hover,
         display: flex;
         align-items: center;
     }
-
-    #topBtn img {
-        width: 40px;
-        height: auto;
-    }
 }
 
 @media (max-width: 800px) { 
-    #topBtn img {
-        width: 30px;
-        height: auto;
-    }
-
     header {
         flex-direction: column;
     }
