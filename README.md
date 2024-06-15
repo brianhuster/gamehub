@@ -1,5 +1,5 @@
 # gamehub
-A game hub website using Node.js, ExpressJS, MySQL, and EJS as project for the subject "Web Designing and Programming" at Hanoi University of Science and Technology.
+A game hub website using Node.js, ExpressJS, MySQL, and EJS built as final project for the subject "Web Designing and Programming" at Hanoi University of Science and Technology.
 
 ## Installation
 Make sure you have Node.js installed on your computer. If not, you can download it [here](https://nodejs.org/en/download/)
