@@ -38,14 +38,6 @@ Now run the file `db/db.sql` in MySQL
 npm run dev
 ``` 
 
-## Phân công công việc
-
-| Họ và tên              | Phân công                                            |
-| ---------------------- | ---------------------------------------------------- |
-| Phạm Thùy Lâm          | ejs các trang, css cho header và footer              |
-| Nguyễn Minh Tiền Trọng | Trang admin, đăng nhập, đăng ký                      |
-| Phạm Bình An           | Các phần css và js còn lại, duyệt code của các thành viên khác |
-
 ## Requirement Completion Level
 
 | STT | Yêu cầu                                                                                                                         | Điểm | Tự đánh giá     |
