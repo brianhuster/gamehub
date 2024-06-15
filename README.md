@@ -23,16 +23,6 @@ Install mysql server and start it (This instruction is for Ubuntu, for other OS,
 
 ` sudo service mysql start `
 
-` sudo mysql_secure_installation `
-
-` sudo mysql `
-
-` sudo apt update `
-
-` sudo apt install mysql-server `
-
-` sudo service mysql start `
-
 Execute these queries in MySQL
 ```
 CREATE USER 'brianhuster'@'localhost' IDENTIFIED BY 'password';
