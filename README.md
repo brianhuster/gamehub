@@ -38,7 +38,7 @@ Now run the file `db/db.sql` in MySQL
 npm run dev
 ``` 
 
-## Requirement Completion Level
+## Completion Level (self-assessment, based on our Professor's requirements)
 
 | STT | Yêu cầu                                                                                                                         | Điểm | Tự đánh giá     |
 | --- | ------------------------------------------------------------------------------------------------------------------------------- | ---- | --------------- |
