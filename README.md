@@ -1,6 +1,16 @@
 # gamehub
+A game hub website using Node.js, ExpressJS, MySQL, and EJS as project for the subject "Web Designing and Programming" at Hanoi University of Science and Technology.
 
-## Cài đặt
+## Installation
+Make sure you have Node.js installed on your computer. If not, you can download it [here](https://nodejs.org/en/download/)
+
+Download this repository
+```
+git clone https://github.com/brianhuster/gamehub.git
+cd gamehub
+```
+
+Install the dependencies
 ```
 npm install
 ```
@@ -38,7 +48,7 @@ Now run the file `db/db.sql` in MySQL
 npm run dev
 ``` 
 
-## Completion Level (self-assessment, based on our Lecturer's requirements)
+## Completion Level (self-assessment, based on our Professor's requirements)
 
 | STT | Yêu cầu                                                                                                                         | Điểm | Tự đánh giá     |
 | --- | ------------------------------------------------------------------------------------------------------------------------------- | ---- | --------------- |
