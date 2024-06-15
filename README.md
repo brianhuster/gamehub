@@ -33,6 +33,8 @@ USE gamehub;
 
 Now run the file `db/db.sql` in MySQL
 
+```mysql -u brianhuster -p gamehub < db/db.sql```
+
 ## Compiles and hot-reloads for development
 ```
 npm run dev
