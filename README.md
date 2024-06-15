@@ -5,8 +5,22 @@
 npm install
 ```
 
-Install mysql server
+Install mysql server and start it (This instruction is for Ubuntu, for other OS, please refer to the official documentation of MySQL)
+
+` sudo apt update `
+
 ` sudo apt install mysql-server `
+
+` sudo service mysql start `
+
+` sudo mysql_secure_installation `
+
+` sudo mysql `
+
+` sudo apt update `
+
+` sudo apt install mysql-server `
+
 ` sudo service mysql start `
 
 Execute these queries in MySQL
@@ -29,8 +43,8 @@ npm run dev
 | Họ và tên              | Phân công                                            |
 | ---------------------- | ---------------------------------------------------- |
 | Phạm Thùy Lâm          | ejs các trang, css cho header và footer              |
-| Nguyễn Minh Tiền Trọng | Trang admin, đăng nhập, đăng ký, tính số view        |
-| Phạm Bình An           | Các phần còn lại, duyệt code của các thành viên khác |
+| Nguyễn Minh Tiền Trọng | Trang admin, đăng nhập, đăng ký                      |
+| Phạm Bình An           | Các phần css và js còn lại, duyệt code của các thành viên khác |
 
 ## Requirement Completion Level
 
@@ -68,4 +82,4 @@ npm run dev
 |     |                                                                                                                                 |      |                 |
 | 1   | Điểm cộng tổ chức project                                                                                                       | 1    | Hoàn thành      |
 | 2   | Hệ số tự làm, không dùng thư viện ngoài                                                                                         | 1    | Hoàn thành      |
-| 3   | Trình bày và thiết kế giao diện                                                                                                 | 0.3  |                 |
+| 3   | Trình bày và thiết kế giao diện                                                                                                 | 0.3/1  |                 |
